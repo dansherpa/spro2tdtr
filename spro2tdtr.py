@@ -1,6 +1,8 @@
 # coding=utf-8
+import os
 import sqlite3
 import sys
+import tempfile
 import zipfile
 from sqlite3 import Error
 import declxml as xml
@@ -305,4 +307,6 @@ if __name__ == '__main__':
     if len(sys.argv) != 4:
         print("Usage: " + sys.argv[0] + " primary.spro backup.spro draft-tdtr.xml")
         exit(1)
+    tempdir = tempfile.gettempdir()
+    os.chdir(tempdir)
     process_file(sys.argv[1], sys.argv[2], sys.argv[3])
