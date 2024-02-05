@@ -6,4 +6,5 @@ src/spro2tdtr/spro2tdtr.py
 src/spro2tdtr.egg-info/PKG-INFO
 src/spro2tdtr.egg-info/SOURCES.txt
 src/spro2tdtr.egg-info/dependency_links.txt
+src/spro2tdtr.egg-info/requires.txt
 src/spro2tdtr.egg-info/top_level.txt

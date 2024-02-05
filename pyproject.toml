@@ -1,10 +1,11 @@
 [build-system]
-requires = ["setuptools>=61.0","wheel","declxml"]
+requires = ["setuptools>=61.0","wheel"]
 build-backend = "setuptools.build_meta:__legacy__"
 
 [project]
 name = "spro2tdtr"
-version = "0.0.2"
+version = "0.0.3"
+dependencies=["declxml"]
 authors = [
   { name="Dan Kennedy", email="dansherpa@gmail.com" },
 ]

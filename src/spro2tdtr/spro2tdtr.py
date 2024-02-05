@@ -20,7 +20,7 @@ def create_connection(db_file):
     return conn
 
 
-__VERSION__ = "0.0.2"
+__VERSION__ = "0.0.3"
 
 
 FINISHES_QUERY = '''SELECT F."C_NUM" AS bib,
