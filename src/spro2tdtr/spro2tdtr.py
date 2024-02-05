@@ -20,7 +20,7 @@ def create_connection(db_file):
     return conn
 
 
-__VERSION__ = "0.0.1"
+__VERSION__ = "0.0.2"
 
 
 FINISHES_QUERY = '''SELECT F."C_NUM" AS bib,
@@ -37,8 +37,8 @@ AND bib > 0 AND (bib < 901 OR bib > 909)
 ORDER BY F."C_LINE"'''
 
 
-def get_first_last_best_run(run, system, first=0, last=0, best=0):
-    conn = create_connection("File2")
+def get_first_last_best_run(tempdir, run, system, first=0, last=0, best=0):
+    conn = create_connection(os.path.join(tempdir, "File2"))
 
     cur = conn.cursor()
     query = FINISHES_QUERY.format(run=run)
@@ -286,15 +286,17 @@ tdtr_processor = xml.dictionary('Fisresults', [
 
 
 def process_file(primary, backup, tdtr):
+    tempdir = tempfile.gettempdir()
+    print("Using temp dir: ", tempdir)
     with zipfile.ZipFile(primary, 'r') as zipObj:
-        zipObj.extractall()
-    a_first_1, a_last_1, a_best_1 = get_first_last_best_run(1, "Primary")
-    a_first_2, a_last_2, a_best_2 = get_first_last_best_run(2, "Primary")
+        zipObj.extractall(path=tempdir)
+    a_first_1, a_last_1, a_best_1 = get_first_last_best_run(tempdir,1, "Primary")
+    a_first_2, a_last_2, a_best_2 = get_first_last_best_run(tempdir, 2, "Primary")
 
     with zipfile.ZipFile(backup, 'r') as zipObj:
-        zipObj.extractall()
-    b_first_1, b_last_1, b_best_1 = get_first_last_best_run(1, "Backup", a_first_1.bib, a_last_1.bib, a_best_1.bib)
-    b_first_2, b_last_2, b_best_2 = get_first_last_best_run(2, "Backup", a_first_2.bib, a_last_2.bib, a_best_2.bib)
+        zipObj.extractall(path=tempdir)
+    b_first_1, b_last_1, b_best_1 = get_first_last_best_run(tempdir, 1, "Backup", a_first_1.bib, a_last_1.bib, a_best_1.bib)
+    b_first_2, b_last_2, b_best_2 = get_first_last_best_run(tempdir,2, "Backup", a_first_2.bib, a_last_2.bib, a_best_2.bib)
 
     results = xml.parse_from_file(tdtr_processor, tdtr, 'utf-8')
     write_tdtr(results, a_first_1, a_last_1, a_best_1, "A", 1)
@@ -310,6 +312,6 @@ if __name__ == '__main__':
     if len(sys.argv) != 4:
         print("Usage: " + sys.argv[0] + " primary.spro backup.spro draft-tdtr.xml")
         exit(1)
-    tempdir = tempfile.gettempdir()
-    os.chdir(tempdir)
+    # tempdir = tempfile.gettempdir()
+    # os.chdir(tempdir)
     process_file(sys.argv[1], sys.argv[2], sys.argv[3])
