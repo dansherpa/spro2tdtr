@@ -1,0 +1,2 @@
+[console_scripts]
+spro2tdtr = spro2tdtr.spro2tdtr:runit

@@ -7,7 +7,16 @@ import zipfile
 from sqlite3 import Error
 import declxml as xml
 
-from Result import Result
+
+class Result:
+  def __init__(self, bib, start_micros, start, finish_micros, finish, net_raw, net_time):
+    self.bib = bib
+    self.start_micros = start_micros
+    self.start = start
+    self.finish_micros = finish_micros
+    self.finish = finish
+    self.net_raw = net_raw
+    self.net_time = net_time
 
 
 def create_connection(db_file):
@@ -18,9 +27,6 @@ def create_connection(db_file):
         print(e)
 
     return conn
-
-
-__VERSION__ = "0.0.3"
 
 
 FINISHES_QUERY = '''SELECT F."C_NUM" AS bib,
@@ -308,10 +314,14 @@ def process_file(primary, backup, tdtr):
     xml.serialize_to_file(tdtr_processor, results, tdtr, 'utf=8', '  ')
 
 
-if __name__ == '__main__':
+def runit():
     if len(sys.argv) != 4:
         print("Usage: " + sys.argv[0] + " primary.spro backup.spro draft-tdtr.xml")
         exit(1)
     # tempdir = tempfile.gettempdir()
     # os.chdir(tempdir)
     process_file(sys.argv[1], sys.argv[2], sys.argv[3])
+
+
+if __name__ == '__main__':
+    runit()

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta:__legacy__"
 
 [project]
 name = "spro2tdtr"
-version = "0.0.3"
+version = "0.0.11"
 dependencies=["declxml"]
 authors = [
   { name="Dan Kennedy", email="dansherpa@gmail.com" },
@@ -21,3 +21,7 @@ classifiers = [
 [project.urls]
 Homepage = "https://github.com/dansherpa/spro2tdtr"
 Issues = "https://github.com/dansherpa/spro2tdtr/issues"
+
+[project.scripts]
+spro2tdtr = "spro2tdtr.spro2tdtr:runit"
+

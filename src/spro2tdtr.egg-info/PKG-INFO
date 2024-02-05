@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: spro2tdtr
-Version: 0.0.3
+Version: 0.0.11
 Summary: Extracts TOD data from .spro file and puts it in TDTR
 Author-email: Dan Kennedy <dansherpa@gmail.com>
 Project-URL: Homepage, https://github.com/dansherpa/spro2tdtr

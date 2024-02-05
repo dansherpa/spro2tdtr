@@ -1,6 +1,6 @@
 py -m build
-py -m twine upload --repository pypi dist/spro2tdtr-0.0.3-*
-py -m twine upload --repository pypi dist/spro2tdtr-0.0.3.*
+py -m twine upload --repository pypi dist/spro2tdtr-0.0.11-*
+py -m twine upload --repository pypi dist/spro2tdtr-0.0.11.*
 
 REM python -m venv c:\dpk.test
 REM do this
