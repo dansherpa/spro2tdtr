@@ -20,6 +20,9 @@ def create_connection(db_file):
     return conn
 
 
+__VERSION__ = "0.0.1"
+
+
 FINISHES_QUERY = '''SELECT F."C_NUM" AS bib,
   S."C_HOUR2" start_micros,
   STRFTIME("%H:%M:%S", S."C_HOUR2"/1000000.0, "unixepoch") || "." || SUBSTR("000000" || (S."C_HOUR2" % 1000000), -6, 4) AS start_hour_cell,

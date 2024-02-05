@@ -1,0 +1,23 @@
+[build-system]
+#requires = ["setuptools>=61.0","wheel","tempfile","zipfile","sqlite3","declxml"]
+requires = ["setuptools>=61.0","wheel","declxml"]
+build-backend = "setuptools.build_meta:__legacy__"
+
+[project]
+name = "spro2tdtr"
+version = "0.0.1"
+authors = [
+  { name="Dan Kennedy", email="dansherpa@gmail.com" },
+]
+description = "Extracts TOD data from .spro file and puts it in TDTR"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/dansherpa/spro2tdtr"
+Issues = "https://github.com/dansherpa/spro2tdtr/issues"
