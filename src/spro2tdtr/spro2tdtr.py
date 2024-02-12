@@ -29,7 +29,7 @@ def create_connection(db_file):
     return conn
 
 
-FINISHES_QUERY = '''SELECT F."C_NUM" AS bib,
+FINISHES_QUERY = '''SELECT F."C_NUM" AS bib, F."C_STATUS" as status,
   S."C_HOUR2" start_micros,
   STRFTIME("%H:%M:%S", S."C_HOUR2"/1000000.0, "unixepoch") || "." || SUBSTR("000000" || (S."C_HOUR2" % 1000000), -6, 4) AS start_hour_cell,
   F."C_HOUR2" finish_micros,
@@ -71,7 +71,7 @@ def get_first_last_best_run(tempdir, run, system, first=0, last=0, best=0):
             if d['bib'] == best:
                 result_best = result
         else:
-            if d['net_raw'] < result_best.net_raw:
+            if d['net_raw'] < result_best.net_raw and d['status'] == 0:
                 result_best = result
         if last > 0:
             if d['bib'] == last:
